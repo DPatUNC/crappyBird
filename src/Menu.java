@@ -10,19 +10,17 @@ public class Menu extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	static BufferedImage img = null;
-	{
-		try {
-			img = ImageIO.read(new URL("http://i.imgur.com/bhAo1qs.png"));
-		} catch (IOException e) {
-			System.out.println("");
-		}
-	}
 
 	boolean startGame = false;
 	boolean deadGame = false;
 
 	public Menu() {
 		setFocusable(true);
+		try {
+			img = ImageIO.read(new URL("http://i.imgur.com/bhAo1qs.png"));
+		} catch (IOException e) {
+			System.out.println("Can't load the image");
+		}
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

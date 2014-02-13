@@ -8,59 +8,60 @@ import javax.imageio.ImageIO;
 
 public class Wall {
 
-	Random rnd = new Random();
+	private static Random rnd = new Random();
 
-	int x;
-	int y = rnd.nextInt(Game.HEIGHT - 400) + 200; // generates the y value that is the top of the bottom wall
-	static int speed = -6; // scrolling speed
-	int WIDTH = 45; // width of a wall
-	int height = Game.HEIGHT - y; // height of the wall, just the height of the window - how high the wall is
-	int GAP = 400; // gap size
+	private int width; // width of a wall
+	private int height; // height of wall (screen)
+	private static int GAP_SIZE = 400; // gap size
+	private static int WALL_WIDTH = 45;
 
-	static BufferedImage img = null;
-	{
-		try {
-			img = ImageIO.read(new URL("http://i.imgur.com/QxrftcZ.png"));
-
-		} catch (IOException e) {
-			System.out.println("WRONG WALL"); 
-		}
+	private Rectangle top, bottom;
+	public int getX() {
+		return this.top.x;
 	}
 
-	public Wall(int i) {
-		this.x = i;
+	private int speed;
+
+	private static BufferedImage img = null;
+
+	public Wall(int initX, int height, int width, int speed) {
+		try {
+			img = ImageIO.read(new URL("http://i.imgur.com/QxrftcZ.png"));
+		} catch (IOException e) {
+			System.out.println("Couldn't grab wall image"); 
+		}
+		this.height = height;
+		this.width = width;
+		this.speed = speed;
+		buildWalls(initX);
+	}
+
+	private void buildWalls(int x) {
+		int gapTop = rnd.nextInt(height - 400) + 200;
+		top = new Rectangle(x, 0, WALL_WIDTH, gapTop);
+		bottom = new Rectangle(x, gapTop + GAP_SIZE, WALL_WIDTH, height - gapTop + GAP_SIZE);
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(img, x, y, 45, 800, null); // top part
-		g.drawImage(img, x, (-Game.HEIGHT) + (y - GAP), 45, 800, null); // bottom part
+		g.drawImage(img, top.x, top.y, top.width, top.height, null); // top part
+		g.drawImage(img, bottom.x, bottom.y, bottom.width, bottom.height, null); // bottom part
 	}
 
 	public void move() {
 
-		x += speed; // scrolls the wall
+		top.x += speed; // scrolls the wall
+		bottom.x += speed; // scrolls the wall
 
-		// These Rectanlges are used to detect collisions
-		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
-		Rectangle wallBoundsTop = new Rectangle(x, 0, WIDTH, Game.HEIGHT
-				- (height + GAP));
-
+		/*
 		if ((wallBounds.intersects(FlappyBird.getBounds()))
 				|| (wallBoundsTop.intersects(FlappyBird.getBounds()))) {
 			FlappyBird.reset();
 			died();
 		}
+		*/
 
-		if (x <= 0 - WIDTH) {
-			x = Game.WIDTH;
-			y = rnd.nextInt(Game.HEIGHT - 400) + 200;
-			height = Game.HEIGHT - y;
+		if (top.x <= 0 - WALL_WIDTH) {
+			buildWalls(width);
 		}
-	}
-
-	public void died() {
-		y = rnd.nextInt(Game.HEIGHT - 400) + 200;
-		height = Game.HEIGHT - y;
-		Game.dead = true;
 	}
 }
