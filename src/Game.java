@@ -56,7 +56,7 @@ public class Game extends JPanel {
 		birdy.paint(g); // the wee little birdy
 
 		g.setFont(new Font("comicsans", Font.BOLD, 40));
-		g.drawString("" + score, WIDTH / 2 - 20, 700);
+		g.drawString("" + score, width / 2 - 20, 700);
 	}
 
 	public void move() {
