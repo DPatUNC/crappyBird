@@ -17,7 +17,7 @@ public class Main {
 	private static Game game;
 	private final Timer animationTimer;
 
-	private final static String music = "90 Nightflower.mp3";
+	private final static String music = "test.wav";
 	private static Sound backgroundm = SoundStore.get().getSound(music);
 	
 	public Main() {
