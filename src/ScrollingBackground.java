@@ -11,18 +11,18 @@ public class ScrollingBackground {
 	private Sprite bg = null;
 
 	public ScrollingBackground(int scrollSpeed) {
-		bg = SpriteStore.get().getSprite("bg","http://i.imgur.com/iYHN20d.png");
+		bg = SpriteStore.get().getSprite("bg",null);
 		this.speed = scrollSpeed;
 	}
 
 	public void paint(Graphics g) {
 		bg.draw(g, scrollX, 0);
-		bg.draw(g, scrollX + 1800, 0);
+		bg.draw(g, scrollX + bg.getWidth(), 0);
 	}
 
 	public void move() {
 		scrollX += speed;
-		if (scrollX <= -1800) {
+		if (scrollX <= -bg.getWidth()) {
 			scrollX = 0;
 		}
 	}

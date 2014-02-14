@@ -22,10 +22,12 @@ public class Wall {
 
 	private int speed;
 
-	private static Sprite img = null;
+	private static Sprite up = null;
+	private static Sprite down = null;
 
 	public Wall(int initX, int height, int width, int speed) {
-		img = SpriteStore.get().getSprite("wall","http://i.imgur.com/QxrftcZ.png");
+		up = SpriteStore.get().getSprite("wall-up",null);
+		down = SpriteStore.get().getSprite("wall-down",null);
 		this.height = height;
 		this.width = width;
 		this.speed = speed;
@@ -39,8 +41,8 @@ public class Wall {
 	}
 
 	public void paint(Graphics g) {
-		img.draw(g, top.x, top.y, top.width, top.height);
-		img.draw(g, bottom.x, bottom.y, bottom.width, bottom.height);
+		down.draw(g, top.x, top.y, top.width, top.height);
+		up.draw(g, bottom.x, bottom.y, bottom.width, bottom.height);
 	}
 
 	public void move() {

@@ -60,8 +60,9 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		// pre-load the images
 		System.out.println("Loading...");
-		SpriteStore.get().getSprite("bg","http://i.imgur.com/iYHN20d.png");
-		SpriteStore.get().getSprite("wall","http://i.imgur.com/QxrftcZ.png");
+		SpriteStore.get().getSprite("bg","http://i.imgur.com/qsjFzFa.png");
+		SpriteStore.get().getSprite("wall-up","http://i.imgur.com/jilWI85.png");
+		SpriteStore.get().getSprite("wall-down","http://i.imgur.com/GJELjLN.png");
 		SpriteStore.get().getSprite("bird","http://i.imgur.com/0AZzt0Z.png");
 		System.out.println("Loaded.");
 		playGame();
