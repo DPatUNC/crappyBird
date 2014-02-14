@@ -45,11 +45,11 @@ public class Main {
 		switchView(null, menu);
 		// play the game
 		while (true) {
+			game = new Game(WIDTH, HEIGHT);
 			while (menu.startGame == false) {
 				Thread.sleep(10);
 			}
 			menu.startGame = false;
-			game = new Game(WIDTH, HEIGHT);
 			switchView(menu, game);
 			int score = game.playGame();
 			System.out.println("You scored: " + score);
@@ -59,9 +59,11 @@ public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		// pre-load the images
+		System.out.println("Loading...");
 		SpriteStore.get().getSprite("bg","http://i.imgur.com/iYHN20d.png");
 		SpriteStore.get().getSprite("wall","http://i.imgur.com/QxrftcZ.png");
 		SpriteStore.get().getSprite("bird","http://i.imgur.com/0AZzt0Z.png");
+		System.out.println("Loaded.");
 		playGame();
 	}
 }
