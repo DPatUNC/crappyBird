@@ -66,6 +66,11 @@ public class Game extends JPanel {
 		wall.move();
 		wall2.move();
 
+		if (wall.intersects(birdy.getBounds()) || wall2.intersects(birdy.getBounds())) {
+			dead = true;
+			return;
+		}
+
 		if ((wall.getX() == birdy.getX()) || (wall2.getX() == birdy.getX())) { 
 			score++;
 		}

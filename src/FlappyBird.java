@@ -22,14 +22,10 @@ public class FlappyBird {
 	private int acceleration = 1;
 	private int speed = 2;
 
-	private BufferedImage img = null;
+	private Sprite img = null;
 
 	public FlappyBird(int initX, int initY) {
-		try {
-			img = ImageIO.read(new URL("http://i.imgur.com/0AZzt0Z.png"));
-		} catch (IOException e) {
-			System.out.println("");
-		}
+		img = SpriteStore.get().getSprite("bird","http://i.imgur.com/0AZzt0Z.png");
 		this.x = initX - (DIAMETER / 2);
 		this.y = initY;
 	}
@@ -45,7 +41,7 @@ public class FlappyBird {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(img, x, y, 55, 65, null);
+		img.draw(g, x, y, 55, 65);
 	}
 
 	public Rectangle getBounds() {

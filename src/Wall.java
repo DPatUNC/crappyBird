@@ -22,14 +22,10 @@ public class Wall {
 
 	private int speed;
 
-	private static BufferedImage img = null;
+	private static Sprite img = null;
 
 	public Wall(int initX, int height, int width, int speed) {
-		try {
-			img = ImageIO.read(new URL("http://i.imgur.com/QxrftcZ.png"));
-		} catch (IOException e) {
-			System.out.println("Couldn't grab wall image"); 
-		}
+		img = SpriteStore.get().getSprite("wall","http://i.imgur.com/QxrftcZ.png");
 		this.height = height;
 		this.width = width;
 		this.speed = speed;
@@ -39,29 +35,27 @@ public class Wall {
 	private void buildWalls(int x) {
 		int gapTop = rnd.nextInt(height - 400) + 200;
 		top = new Rectangle(x, 0, WALL_WIDTH, gapTop);
-		bottom = new Rectangle(x, gapTop + GAP_SIZE, WALL_WIDTH, height - gapTop + GAP_SIZE);
+		bottom = new Rectangle(x, gapTop + GAP_SIZE, WALL_WIDTH, height - gapTop - GAP_SIZE);
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(img, top.x, top.y, top.width, top.height, null); // top part
-		g.drawImage(img, bottom.x, bottom.y, bottom.width, bottom.height, null); // bottom part
+		img.draw(g, top.x, top.y, top.width, top.height);
+		img.draw(g, bottom.x, bottom.y, bottom.width, bottom.height);
 	}
 
 	public void move() {
-
-		top.x += speed; // scrolls the wall
-		bottom.x += speed; // scrolls the wall
-
-		/*
-		if ((wallBounds.intersects(FlappyBird.getBounds()))
-				|| (wallBoundsTop.intersects(FlappyBird.getBounds()))) {
-			FlappyBird.reset();
-			died();
-		}
-		*/
+		top.x += speed;
+		bottom.x += speed;
 
 		if (top.x <= 0 - WALL_WIDTH) {
 			buildWalls(width);
 		}
+	}
+
+	public boolean intersects(Rectangle other) {
+		if (top.intersects(other) || bottom.intersects(other)) {
+			return true;
+		}
+		return false;
 	}
 }

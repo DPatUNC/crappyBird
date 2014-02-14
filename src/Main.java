@@ -58,6 +58,10 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
+		// pre-load the images
+		SpriteStore.get().getSprite("bg","http://i.imgur.com/iYHN20d.png");
+		SpriteStore.get().getSprite("wall","http://i.imgur.com/QxrftcZ.png");
+		SpriteStore.get().getSprite("bird","http://i.imgur.com/0AZzt0Z.png");
 		playGame();
 	}
 }

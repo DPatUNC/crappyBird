@@ -8,20 +8,16 @@ import java.io.IOException;
 public class ScrollingBackground {
 	private int scrollX = 0;
 	private int speed;
-	private BufferedImage bg = null;
+	private Sprite bg = null;
 
 	public ScrollingBackground(int scrollSpeed) {
-		try {
-			bg = ImageIO.read(new URL("http://i.imgur.com/iYHN20d.png"));
-		} catch (IOException e) {
-			System.out.println("Couldn't load background");
-		}
+		bg = SpriteStore.get().getSprite("bg","http://i.imgur.com/iYHN20d.png");
 		this.speed = scrollSpeed;
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(bg, scrollX, 0, null);
-		g.drawImage(bg, scrollX + 1800, 0, null);
+		bg.draw(g, scrollX, 0);
+		bg.draw(g, scrollX + 1800, 0);
 	}
 
 	public void move() {
