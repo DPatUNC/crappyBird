@@ -75,7 +75,7 @@ public class Game extends JPanel {
 			score++;
 		}
 
-		if (birdy.getY() > height) {
+		if (birdy.getY() > height || birdy.getY() < 0) {
 			dead = true;
 		}
 	}
