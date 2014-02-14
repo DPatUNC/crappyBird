@@ -12,7 +12,7 @@ public class Wall {
 
 	private int width; // width of a wall
 	private int height; // height of wall (screen)
-	private static int GAP_SIZE = 400; // gap size
+	private static int GAP_SIZE = 250; // gap size
 	private static int WALL_WIDTH = 45;
 
 	private Rectangle top, bottom;
@@ -33,7 +33,7 @@ public class Wall {
 	}
 
 	private void buildWalls(int x) {
-		int gapTop = rnd.nextInt(height - 400) + 200;
+		int gapTop = rnd.nextInt(height - 400);
 		top = new Rectangle(x, 0, WALL_WIDTH, gapTop);
 		bottom = new Rectangle(x, gapTop + GAP_SIZE, WALL_WIDTH, height - gapTop - GAP_SIZE);
 	}

@@ -20,7 +20,7 @@ public class Game extends JPanel {
 	public Game(int width, int height) {
 		this.width = width;
 		this.height = height;
-		wall = new Wall(width + 300, height, width, SCROLL_SPEED);
+		wall = new Wall(width, height, width, SCROLL_SPEED);
 		wall2 = new Wall(width + (width / 2), height, width, SCROLL_SPEED);
 		birdy = new FlappyBird(width / 2, height / 2);
 

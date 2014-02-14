@@ -47,8 +47,7 @@ class SpriteStore {
 			// from the appropriate place, this helps with deploying the game
 			// with things like webstart. You could equally do a file look
 			// up here.
-			URL url = new URL(loc);
-
+			URL url = new URL(loc); 
 			if (url == null) {
 				fail("Can't find ref: " + ref);
 			}
